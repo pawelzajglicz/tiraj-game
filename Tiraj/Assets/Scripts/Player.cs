@@ -12,10 +12,12 @@ public class Player : MonoBehaviour
     private float xDisplacement;
 
     private Rigidbody2D rigidBody;
+    private Animator animator;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         isGrounded = false;
     }
 
@@ -31,6 +33,9 @@ public class Player : MonoBehaviour
             isGrounded = false;
         }
 
+        animator.SetFloat("runSpeed", Mathf.Abs(rigidBody.velocity.x));
+        animator.SetFloat("jumpSpeed", rigidBody.velocity.y);
+
         if (rigidBody.velocity.x < 0)
         {
             transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
@@ -44,5 +49,6 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isGrounded = true;
+        animator.SetTrigger("grounded");
     }
 }
