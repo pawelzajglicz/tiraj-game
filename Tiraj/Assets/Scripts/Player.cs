@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
 
-    [SerializeField] GameObject deathVFX;
+    [SerializeField] GameObject plopVFX;
     [SerializeField] GameObject playerPrefab;
 
 
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
         BringNewAlien();
 
-        GameObject explosion = Instantiate(deathVFX, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
         Destroy(explosion, deathTime);
     }
 
