@@ -87,7 +87,9 @@ public class Player : MonoBehaviour
     private void Plop()
     {
         Destroy(gameObject);
-        BringNewAlien();
+        int playersAmount = FindObjectsOfType<Player>().Length;
+
+        if (playersAmount == 0) BringNewAlien();
 
         GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
         Destroy(explosion, deathTime);
