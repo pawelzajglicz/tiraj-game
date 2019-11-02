@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6790046876545406003}
   - component: {fileID: 2231251483402439891}
   - component: {fileID: -6625430687365981249}
+  - component: {fileID: 2630989617628638724}
   m_Layer: 0
   m_Name: WorldReversingPlatform
   m_TagString: Untagged
@@ -129,3 +130,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2630989617628638724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2944057721316177128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efe31426e695f14ca5f40a258af859b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
     private bool movingEnabled = false;
     private int broughtChildren = 0;
     private float xOffset;
+    private int horizontalDirection = 1;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour
     {
         if (!movingEnabled) return;
 
-        xDisplacement = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        xDisplacement = Input.GetAxis("Horizontal") * speed * Time.deltaTime * horizontalDirection;
         rigidBody.velocity = new Vector2(xDisplacement, rigidBody.velocity.y);
     }
 
@@ -101,8 +102,10 @@ public class Player : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, birthPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
         newPlayer.GetComponent<Player>().enabled = true;
+        newPlayer.GetComponent<Player>().horizontalDirection = horizontalDirection;
         newPlayer.GetComponent<BoxCollider2D>().enabled = true;
         newPlayer.GetComponent<Animator>().enabled = true;
+
         broughtChildren++;
     }
 
@@ -148,5 +151,10 @@ public class Player : MonoBehaviour
     internal void StopGrowing()
     {
         isGrowing = false;
+    }
+
+    public void ReverseHorizontal()
+    {
+        horizontalDirection *= -1;
     }
 }
