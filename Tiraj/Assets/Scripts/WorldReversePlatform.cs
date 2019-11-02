@@ -15,12 +15,18 @@ public class WorldReversePlatform : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            camera.transform.Rotate(0, 0, 180, Space.Self);
-
-            Player[] players = FindObjectsOfType<Player>();
-            foreach (Player player in players)
+            Player player = collider.gameObject.GetComponent<Player>();
+            if (player.isAllowedToReverseWorld())
             {
-                player.ReverseHorizontal();
+
+                player.worldReversingCounter++;
+                camera.transform.Rotate(0, 0, 180, Space.Self);
+
+                Player[] players = FindObjectsOfType<Player>();
+                foreach (Player pl in players)
+                {
+                    pl.ReverseHorizontal();
+                }
             }
         }
 
