@@ -179,4 +179,9 @@ public class Player : MonoBehaviour
         GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
         Destroy(explosion, deathTime);
     }
+
+    public void Successed()
+    {
+        Destroy(gameObject);
+    }
 }
