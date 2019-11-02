@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public float speed = 500;
     public float jumpForce = 325;
     public float growingTempo = 0.1f;
+    public int childrenLimit = 3;
 
     private bool isGrowing = false;
     private bool isGrounded;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     private Vector2 startScale;
     private float movementFactor = 0f;
     private bool movingEnabled = false;
+    private int broughtChildren = 0;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -86,11 +88,14 @@ public class Player : MonoBehaviour
 
     public void BringNewAlien()
     {
+        if (broughtChildren >= childrenLimit) return;
+
         GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
         newPlayer.GetComponent<Player>().enabled = true;
         newPlayer.GetComponent<BoxCollider2D>().enabled = true;
         newPlayer.GetComponent<Animator>().enabled = true;
+        broughtChildren++;
     }
 
     private void ServeJumping()
