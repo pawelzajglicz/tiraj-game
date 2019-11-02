@@ -165,6 +165,5 @@ MonoBehaviour:
   speed: 500
   jumpForce: 325
   growingTempo: 0.1
-  deathVFX: {fileID: 2638584077793229267, guid: 8da162f26eebdc347ac3de31d9e09f30,
-    type: 3}
+  plopVFX: {fileID: 2638584077793229267, guid: 8da162f26eebdc347ac3de31d9e09f30, type: 3}
   playerPrefab: {fileID: 817337906924260024}
