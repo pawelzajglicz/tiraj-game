@@ -167,5 +167,9 @@ MonoBehaviour:
   growingTempo: 0.1
   childrenLimit: 3
   xBirthRange: 1
+  worldReversingLimit: 1
+  worldReversingCounter: 0
   plopVFX: {fileID: 2638584077793229267, guid: 8da162f26eebdc347ac3de31d9e09f30, type: 3}
+  smokeVFX: {fileID: 2638584077793229267, guid: e9c651f29ea7bc944bb7a6c5dff22cbd,
+    type: 3}
   playerPrefab: {fileID: 817337906924260024}

@@ -170,6 +170,12 @@ public class Player : MonoBehaviour
 
     public void BurnDeath()
     {
+        Destroy(gameObject);
+        int playersAmount = FindObjectsOfType<Player>().Length;
 
+        if (playersAmount == 0) BringNewAlien();
+
+        GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
+        Destroy(explosion, deathTime);
     }
 }
