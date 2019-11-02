@@ -36,6 +36,7 @@ public class Player : MonoBehaviour
     private Animator animator;
 
     [SerializeField] GameObject plopVFX;
+    [SerializeField] GameObject smokeVFX;
     [SerializeField] GameObject playerPrefab;
 
 
@@ -163,5 +164,10 @@ public class Player : MonoBehaviour
     public void ReverseHorizontal()
     {
         horizontalDirection *= -1;
+    }
+
+    public void BurnDeath()
+    {
+
     }
 }
