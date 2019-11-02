@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     private float xOffset;
     private int horizontalDirection = 1;
     public int worldReversingCounter = 0;
+    private int pointsForDeath = 1;
+    private int pointsForSuccess = 2;
+
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -42,6 +45,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        if (startPosition != Vector2.zero)
+        {
+            Vector2 birthPosition = startPosition;
+            birthPosition.x += xOffset;
+            transform.position = birthPosition;
+        }
+
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isGrounded = false;
@@ -86,10 +96,13 @@ public class Player : MonoBehaviour
 
     private void Plop()
     {
+        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
+        scoreDisplay.RemovePoints(pointsForDeath);
+
         Destroy(gameObject);
         int playersAmount = FindObjectsOfType<Player>().Length;
 
-        if (playersAmount == 1) BringNewAlien();
+        if (playersAmount <= 1) BringNewAlien();
 
         GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
         Destroy(explosion, deathTime);
@@ -101,10 +114,7 @@ public class Player : MonoBehaviour
 
         xOffset = Random.Range(0, xBirthRange);
 
-        Vector2 birthPosition = startPosition;
-        birthPosition.x += xOffset;
-
-        GameObject newPlayer = Instantiate(playerPrefab, birthPosition, Quaternion.identity);
+        GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
         newPlayer.GetComponent<Player>().enabled = true;
         newPlayer.GetComponent<Player>().worldReversingCounter = 0;
@@ -171,10 +181,12 @@ public class Player : MonoBehaviour
 
     public void BurnDeath()
     {
+        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
+        scoreDisplay.RemovePoints(pointsForDeath);
         Destroy(gameObject);
         int playersAmount = FindObjectsOfType<Player>().Length;
 
-        if (playersAmount == 1) BringNewAlien();
+        if (playersAmount <= 1) BringNewAlien();
 
         GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
         explosion.transform.Rotate(-90, 0, 0, Space.Self);
@@ -183,6 +195,10 @@ public class Player : MonoBehaviour
 
     public void Successed()
     {
+        int playersAmount = FindObjectsOfType<Player>().Length;
+        if (playersAmount <= 1) BringNewAlien();
+        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
+        scoreDisplay.AddPoints(pointsForSuccess);
         Destroy(gameObject);
     }
 }
