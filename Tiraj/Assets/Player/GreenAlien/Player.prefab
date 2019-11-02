@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1432512281}
   - component: {fileID: 1432512284}
   - component: {fileID: 1432512283}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -165,5 +165,7 @@ MonoBehaviour:
   speed: 500
   jumpForce: 325
   growingTempo: 0.1
+  childrenLimit: 3
+  xBirthRange: 1
   plopVFX: {fileID: 2638584077793229267, guid: 8da162f26eebdc347ac3de31d9e09f30, type: 3}
   playerPrefab: {fileID: 817337906924260024}
