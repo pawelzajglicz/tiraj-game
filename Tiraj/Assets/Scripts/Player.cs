@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour
     public float jumpForce = 325;
     public float growingTempo = 0.1f;
     public int childrenLimit = 3;
+    public float xBirthRange = 1f;
 
     private bool isGrowing = false;
     private bool isGrounded;
@@ -25,6 +27,7 @@ public class Player : MonoBehaviour
     private float movementFactor = 0f;
     private bool movingEnabled = false;
     private int broughtChildren = 0;
+    private float xOffset;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -90,7 +93,12 @@ public class Player : MonoBehaviour
     {
         if (broughtChildren >= childrenLimit) return;
 
-        GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
+        xOffset = Random.Range(0, xBirthRange);
+
+        Vector2 birthPosition = startPosition;
+        birthPosition.x += xOffset;
+
+        GameObject newPlayer = Instantiate(playerPrefab, birthPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
         newPlayer.GetComponent<Player>().enabled = true;
         newPlayer.GetComponent<BoxCollider2D>().enabled = true;
