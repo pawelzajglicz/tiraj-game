@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float growingTempo = 0.1f;
     public int childrenLimit = 3;
     public float xBirthRange = 1f;
+    public int worldReversingLimit = 2;
 
     private bool isGrowing = false;
     private bool isGrounded;
@@ -29,11 +30,13 @@ public class Player : MonoBehaviour
     private int broughtChildren = 0;
     private float xOffset;
     private int horizontalDirection = 1;
+    public int worldReversingCounter = 0;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
 
     [SerializeField] GameObject plopVFX;
+    [SerializeField] GameObject smokeVFX;
     [SerializeField] GameObject playerPrefab;
 
 
@@ -84,7 +87,9 @@ public class Player : MonoBehaviour
     private void Plop()
     {
         Destroy(gameObject);
-        BringNewAlien();
+        int playersAmount = FindObjectsOfType<Player>().Length;
+
+        if (playersAmount == 0) BringNewAlien();
 
         GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
         Destroy(explosion, deathTime);
@@ -153,8 +158,24 @@ public class Player : MonoBehaviour
         isGrowing = false;
     }
 
+    public bool isAllowedToReverseWorld()
+    {
+        return worldReversingCounter < worldReversingLimit;
+    }
+
     public void ReverseHorizontal()
     {
         horizontalDirection *= -1;
+    }
+
+    public void BurnDeath()
+    {
+        Destroy(gameObject);
+        int playersAmount = FindObjectsOfType<Player>().Length;
+
+        if (playersAmount == 0) BringNewAlien();
+
+        GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
+        Destroy(explosion, deathTime);
     }
 }
