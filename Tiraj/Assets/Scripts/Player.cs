@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     private float xOffset;
     private int horizontalDirection = 1;
     public int worldReversingCounter = 0;
+    private int pointsForDeath = 1;
+    private int pointsForSuccess = 2;
+
 
     private Rigidbody2D rigidBody;
     private Animator animator;
@@ -86,6 +89,9 @@ public class Player : MonoBehaviour
 
     private void Plop()
     {
+        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
+        scoreDisplay.RemovePoints(pointsForDeath);
+
         Destroy(gameObject);
         int playersAmount = FindObjectsOfType<Player>().Length;
 
@@ -171,6 +177,8 @@ public class Player : MonoBehaviour
 
     public void BurnDeath()
     {
+        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
+        scoreDisplay.RemovePoints(pointsForDeath);
         Destroy(gameObject);
         int playersAmount = FindObjectsOfType<Player>().Length;
 
@@ -183,6 +191,9 @@ public class Player : MonoBehaviour
 
     public void Successed()
     {
+        print("aa");
+        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
+        scoreDisplay.AddPoints(pointsForSuccess);
         Destroy(gameObject);
     }
 }

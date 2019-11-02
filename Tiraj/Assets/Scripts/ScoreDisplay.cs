@@ -24,7 +24,7 @@ public class ScoreDisplay : MonoBehaviour
 
     public void RemovePoints(int pointsToRemove)
     {
-        points += pointsToRemove;
+        points -= pointsToRemove;
         scoreText.text = points.ToString();
     }
 }
