@@ -107,6 +107,7 @@ public class Player : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, birthPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
         newPlayer.GetComponent<Player>().enabled = true;
+        newPlayer.GetComponent<Player>().worldReversingCounter = 0;
         newPlayer.GetComponent<Player>().horizontalDirection = horizontalDirection;
         newPlayer.GetComponent<BoxCollider2D>().enabled = true;
         newPlayer.GetComponent<Animator>().enabled = true;
