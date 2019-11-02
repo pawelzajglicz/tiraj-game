@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 817337906924260024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.333939, y: 0.333939, z: 0.333939}
+  m_LocalScale: {x: 0.24942574, y: 0.24942574, z: 0.24942574}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   growingTempo: 0.1
   childrenLimit: 3
   xBirthRange: 1
-  worldReversingLimit: 1
+  worldReversingLimit: 2
   worldReversingCounter: 0
   plopVFX: {fileID: 2638584077793229267, guid: 8da162f26eebdc347ac3de31d9e09f30, type: 3}
   smokeVFX: {fileID: 2638584077793229267, guid: e9c651f29ea7bc944bb7a6c5dff22cbd,
