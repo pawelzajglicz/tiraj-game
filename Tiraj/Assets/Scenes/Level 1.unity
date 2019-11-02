@@ -1319,6 +1319,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 817337906924260024, guid: aa16717e4974a824ab714c6cb2505b03,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7398761191057519741, guid: aa16717e4974a824ab714c6cb2505b03,
         type: 3}
       propertyPath: m_LocalPosition.x
