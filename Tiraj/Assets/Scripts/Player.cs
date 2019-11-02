@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
         Destroy(explosion, deathTime);
     }
 
-    private void BringNewAlien()
+    public void BringNewAlien()
     {
         GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
