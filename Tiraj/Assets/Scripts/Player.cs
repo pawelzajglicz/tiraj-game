@@ -174,9 +174,15 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
         int playersAmount = FindObjectsOfType<Player>().Length;
 
-        if (playersAmount == 0) BringNewAlien();
+        if (playersAmount == 1) BringNewAlien();
 
         GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
+        explosion.transform.Rotate(-90, 0, 0, Space.Self);
         Destroy(explosion, deathTime);
+    }
+
+    public void Successed()
+    {
+        Destroy(gameObject);
     }
 }
