@@ -41,6 +41,13 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject plopVFX;
     [SerializeField] GameObject smokeVFX;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] AudioClip[] deathSounds;
+    [SerializeField] AudioClip[] plopSounds;
+    [SerializeField] AudioClip[] successedSounds;
+
+    private float plopSoundVolume = 0.8f;
+    public float deathSoundVolume = 0.5f;
+    private float successedSoundVolume = 1f;
 
 
     void Start()
@@ -98,6 +105,9 @@ public class Player : MonoBehaviour
     {
         ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
         scoreDisplay.RemovePoints(pointsForDeath);
+
+        int plopSoundIndex = Random.Range(0, plopSounds.Length);
+        AudioSource.PlayClipAtPoint(plopSounds[plopSoundIndex], Camera.main.transform.position, plopSoundVolume);
 
         Destroy(gameObject);
         int playersAmount = FindObjectsOfType<Player>().Length;
@@ -184,8 +194,11 @@ public class Player : MonoBehaviour
         ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
         scoreDisplay.RemovePoints(pointsForDeath);
         Destroy(gameObject);
-        int playersAmount = FindObjectsOfType<Player>().Length;
 
+        int deathSoundIndex = Random.Range(0, deathSounds.Length);
+        AudioSource.PlayClipAtPoint(deathSounds[deathSoundIndex], Camera.main.transform.position, deathSoundVolume);
+
+        int playersAmount = FindObjectsOfType<Player>().Length;
         if (playersAmount <= 1) BringNewAlien();
 
         GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
@@ -197,6 +210,11 @@ public class Player : MonoBehaviour
     {
         int playersAmount = FindObjectsOfType<Player>().Length;
         if (playersAmount <= 1) BringNewAlien();
+
+        int sucessedSoundIndex = Random.Range(0, successedSounds.Length);
+        print(sucessedSoundIndex);
+        AudioSource.PlayClipAtPoint(successedSounds[sucessedSoundIndex], Camera.main.transform.position, successedSoundVolume);
+
         ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
         scoreDisplay.AddPoints(pointsForSuccess);
         Destroy(gameObject);
