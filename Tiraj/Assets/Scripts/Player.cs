@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float maxSizeFactor = 1.8f;
     private float maxSize;
     private float deathTime = 1.5f;
-    private Vector2 startPosition;
+    public Vector2 startPosition;
     private Vector2 startScale;
     private float movementFactor = 0f;
     private bool movingEnabled = false;
@@ -54,18 +54,17 @@ public class Player : MonoBehaviour
     {
         if (startPosition == Vector2.zero)
         {
-            startPosition = transform.position;
-            Vector2 birthPosition = startPosition;
-            xOffset = Random.Range(0, xBirthRange);
-            birthPosition.x += xOffset;
-            transform.position = birthPosition;
+            startPosition = playerPrefab.transform.position;
         }
+        Vector2 birthPosition = startPosition;
+        xOffset = Random.Range(0, xBirthRange);
+        birthPosition.x += xOffset;
+        transform.position = birthPosition;
 
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isGrounded = false;
         maxSize = maxSizeFactor * transform.localScale.x;
-        startPosition = transform.position;
         startScale = transform.localScale;
     }
 
