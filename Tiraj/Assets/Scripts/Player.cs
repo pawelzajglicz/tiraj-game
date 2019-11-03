@@ -52,10 +52,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (startPosition == Vector2.zero)
-        {
-            startPosition = playerPrefab.transform.position;
-        }
+        startPosition = playerPrefab.transform.position;
+
         Vector2 birthPosition = startPosition;
         xOffset = Random.Range(0, xBirthRange);
         birthPosition.x += xOffset;
