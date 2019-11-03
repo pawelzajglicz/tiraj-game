@@ -52,9 +52,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (startPosition != Vector2.zero)
+        if (startPosition == Vector2.zero)
         {
+            startPosition = transform.position;
             Vector2 birthPosition = startPosition;
+            xOffset = Random.Range(0, xBirthRange);
             birthPosition.x += xOffset;
             transform.position = birthPosition;
         }
@@ -121,8 +123,6 @@ public class Player : MonoBehaviour
     public void BringNewAlien()
     {
         if (broughtChildren >= childrenLimit) return;
-
-        xOffset = Random.Range(0, xBirthRange);
 
         GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
