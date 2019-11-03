@@ -112,8 +112,8 @@ public class Player : MonoBehaviour
         AudioSource.PlayClipAtPoint(plopSounds[plopSoundIndex], Camera.main.transform.position, plopSoundVolume);
 
         Destroy(gameObject);
-        int playersAmount = FindObjectsOfType<Player>().Length;
 
+        int playersAmount = FindObjectsOfType<Player>().Length;
         if (playersAmount <= 1) BringNewAlien();
 
         GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
