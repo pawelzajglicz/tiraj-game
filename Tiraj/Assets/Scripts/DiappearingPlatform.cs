@@ -14,13 +14,13 @@ public class DiappearingPlatform : MonoBehaviour
 
     private bool isInteractable = true;
 
-    private BoxCollider2D collider;
+    private BoxCollider2D boxCollider;
     private SpriteRenderer sprtiteRenderer;
 
     private void Start()
     {
-        collider = FindObjectOfType<BoxCollider2D>();
-        sprtiteRenderer = FindObjectOfType<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        sprtiteRenderer = GetComponent<SpriteRenderer>();
     }
 
 
@@ -43,7 +43,7 @@ public class DiappearingPlatform : MonoBehaviour
     IEnumerator ProcessDisappearing()
     {
         yield return new WaitForSeconds(beforeDisappearingTime);
-        collider.enabled = false;
+        boxCollider.enabled = false;
         sprtiteRenderer.enabled = false;
 
         StartCoroutine(ProcessAppearing());
@@ -52,7 +52,7 @@ public class DiappearingPlatform : MonoBehaviour
     IEnumerator ProcessAppearing()
     {
         yield return new WaitForSeconds(disapperingTime);
-        collider.enabled = true;
+        boxCollider.enabled = true;
         sprtiteRenderer.enabled = true;
 
         StartCoroutine(ProcessInteractability());
