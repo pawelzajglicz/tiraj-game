@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float maxSizeFactor = 1.8f;
     private float maxSize;
     private float deathTime = 1.5f;
-    private Vector2 startPosition;
+    public Vector2 startPosition;
     private Vector2 startScale;
     private float movementFactor = 0f;
     private bool movingEnabled = false;
@@ -52,18 +52,19 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        if (startPosition != Vector2.zero)
+        if (startPosition == Vector2.zero)
         {
-            Vector2 birthPosition = startPosition;
-            birthPosition.x += xOffset;
-            transform.position = birthPosition;
+            startPosition = playerPrefab.transform.position;
         }
+        Vector2 birthPosition = startPosition;
+        xOffset = Random.Range(0, xBirthRange);
+        birthPosition.x += xOffset;
+        transform.position = birthPosition;
 
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         isGrounded = false;
         maxSize = maxSizeFactor * transform.localScale.x;
-        startPosition = transform.position;
         startScale = transform.localScale;
     }
 
@@ -110,8 +111,8 @@ public class Player : MonoBehaviour
         AudioSource.PlayClipAtPoint(plopSounds[plopSoundIndex], Camera.main.transform.position, plopSoundVolume);
 
         Destroy(gameObject);
-        int playersAmount = FindObjectsOfType<Player>().Length;
 
+        int playersAmount = FindObjectsOfType<Player>().Length;
         if (playersAmount <= 1) BringNewAlien();
 
         GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
@@ -121,8 +122,6 @@ public class Player : MonoBehaviour
     public void BringNewAlien()
     {
         if (broughtChildren >= childrenLimit) return;
-
-        xOffset = Random.Range(0, xBirthRange);
 
         GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
         newPlayer.transform.localScale = startScale;
