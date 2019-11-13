@@ -17,9 +17,10 @@ public class PumpPlatform : MonoBehaviour
     {
         if (!isActive) return;
 
-        if (collider.gameObject.tag == "Player")
+        GameObject colliderGameObject = collider.gameObject;
+        if (colliderGameObject.CompareTag("Player"))
         {
-            Player player = collider.gameObject.GetComponent<Player>();
+            Player player = colliderGameObject.GetComponent<Player>();
             player.MakeGrowing();
 
             players.Add(player);
@@ -30,9 +31,10 @@ public class PumpPlatform : MonoBehaviour
     {
         if (!isActive) return;
 
-        if (collider.gameObject.tag == "Player")
+        GameObject colliderGameObject = collider.gameObject;
+        if (colliderGameObject.CompareTag("Player"))
         {
-            Player player = collider.gameObject.GetComponent<Player>();
+            Player player = colliderGameObject.GetComponent<Player>();
             player.StopGrowing();
         }
     }
@@ -45,6 +47,7 @@ public class PumpPlatform : MonoBehaviour
     internal void Deactivate()
     {
         isActive = false;
+        if (players == null || players.Count == 0) return;
 
         foreach (Player player in players)
         {

@@ -7,17 +7,15 @@ using Random = UnityEngine.Random;
 public class Player : MonoBehaviour
 {
 
-    public float speed = 500;
-    public float jumpForce = 325;
     public float growingTempo = 0.1f;
     public int childrenLimit = 3;
     public float xBirthRange = 1f;
     public int worldReversingLimit = 2;
 
-    private bool isGrowing = false;
-    private bool isGrounded;
+    public static int playersAmount = 0;
 
-    private float xDisplacement;
+    private bool isGrowing = false;
+
     private float sizeGrowth;
     private Vector2 newSize;
     private float maxSizeFactor = 1.8f;
@@ -25,18 +23,11 @@ public class Player : MonoBehaviour
     private float deathTime = 1.5f;
     public Vector2 startPosition;
     private Vector2 startScale;
-    private float movementFactor = 0f;
-    private bool movingEnabled = false;
     private int broughtChildren = 0;
     private float xOffset;
-    private int horizontalDirection = 1;
     public int worldReversingCounter = 0;
     private int pointsForDeath = 1;
     private int pointsForSuccess = 2;
-
-
-    private Rigidbody2D rigidBody;
-    private Animator animator;
 
     [SerializeField] GameObject plopVFX;
     [SerializeField] GameObject smokeVFX;
@@ -47,44 +38,51 @@ public class Player : MonoBehaviour
 
     private float plopSoundVolume = 0.8f;
     public float deathSoundVolume = 0.5f;
-    private float successedSoundVolume = 1f;
+    private float successedSoundVolume = 0.75f;
 
 
     void Start()
     {
-        startPosition = playerPrefab.transform.position;
+        SetStartPosition();
+        SetStartingValues();
+        playersAmount++;
+    }
 
-        Vector2 birthPosition = startPosition;
-        xOffset = Random.Range(0, xBirthRange);
-        birthPosition.x += xOffset;
-        transform.position = birthPosition;
-
-        rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        isGrounded = false;
+    private void SetStartingValues()
+    {
         maxSize = maxSizeFactor * transform.localScale.x;
         startScale = transform.localScale;
     }
 
+    private void SetStartPosition()
+    {
+        startPosition = playerPrefab.transform.position;
+        Vector2 birthPosition = startPosition;
+        xOffset = Random.Range(0, xBirthRange);
+        birthPosition.x += xOffset;
+        transform.position = birthPosition;
+    }
 
     void Update()
     {
-        ServeHorizontalMoving();
-        ServeJumping();
-        ServeAnimations();
-        ServeFacingDirection();
         ServeResizing();
     }
 
-    private void ServeHorizontalMoving()
+    private void ServeResizing()
     {
-        if (!movingEnabled) return;
-
-        xDisplacement = Input.GetAxis("Horizontal") * speed * Time.deltaTime * horizontalDirection;
-        rigidBody.velocity = new Vector2(xDisplacement, rigidBody.velocity.y);
+        ManageGrowing();
+        CheckPlopDeath();
     }
 
-    private void ServeResizing()
+    private void CheckPlopDeath()
+    {
+        if (transform.localScale.x > maxSize)
+        {
+            Plop();
+        }
+    }
+
+    private void ManageGrowing()
     {
         if (isGrowing)
         {
@@ -93,77 +91,38 @@ public class Player : MonoBehaviour
 
             transform.localScale = newSize;
         }
-
-        if (transform.localScale.x > maxSize)
-        {
-            Plop();
-        }
     }
 
     private void Plop()
     {
-        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
-        scoreDisplay.RemovePoints(pointsForDeath);
+        MenageDeathPoints();
+        PlayPlopSound();
+        Explode();
+    }
 
-        int plopSoundIndex = Random.Range(0, plopSounds.Length);
-        AudioSource.PlayClipAtPoint(plopSounds[plopSoundIndex], Camera.main.transform.position, plopSoundVolume);
-
+    private void Explode()
+    {
         Destroy(gameObject);
-
-        int playersAmount = FindObjectsOfType<Player>().Length;
-        if (playersAmount <= 1) BringNewAlien();
-
         GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
         Destroy(explosion, deathTime);
+    }
+
+    public void Successed()
+    {
+        PlaySuccessSound();
+        ManageSuccessPoints();
+
+        Destroy(gameObject);
     }
 
     public void BringNewAlien()
     {
         if (broughtChildren >= childrenLimit) return;
 
-        GameObject newPlayer = Instantiate(playerPrefab, startPosition, Quaternion.identity);
-        newPlayer.transform.localScale = startScale;
-        newPlayer.GetComponent<Player>().enabled = true;
-        newPlayer.GetComponent<Player>().worldReversingCounter = 0;
-        newPlayer.GetComponent<Player>().horizontalDirection = horizontalDirection;
-        newPlayer.GetComponent<BoxCollider2D>().enabled = true;
-        newPlayer.GetComponent<Animator>().enabled = true;
+        PlayerManager playerManager = FindObjectOfType<PlayerManager>();
+        playerManager.BringNewAlien();
 
         broughtChildren++;
-    }
-
-    private void ServeJumping()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rigidBody.AddForce(new Vector2(0, jumpForce));
-            isGrounded = false;
-        }
-    }
-
-    private void ServeAnimations()
-    {
-        animator.SetFloat("runSpeed", Mathf.Abs(rigidBody.velocity.x));
-        animator.SetFloat("jumpSpeed", rigidBody.velocity.y);
-    }
-
-    private void ServeFacingDirection()
-    {
-        if (rigidBody.velocity.x < 0)
-        {
-            transform.rotation = Quaternion.AngleAxis(180, Vector3.up);
-        }
-        else if (rigidBody.velocity.x > 0)
-        {
-            transform.rotation = Quaternion.AngleAxis(0, Vector3.up);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        isGrounded = true;
-        animator.SetTrigger("grounded");
-        movingEnabled = true;
     }
 
     internal void MakeGrowing()
@@ -176,44 +135,58 @@ public class Player : MonoBehaviour
         isGrowing = false;
     }
 
-    public bool isAllowedToReverseWorld()
+    public bool IsAllowedToReverseWorld()
     {
         return worldReversingCounter < worldReversingLimit;
     }
 
-    public void ReverseHorizontal()
-    {
-        horizontalDirection *= -1;
-    }
-
     public void BurnDeath()
     {
-        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
-        scoreDisplay.RemovePoints(pointsForDeath);
-        Destroy(gameObject);
-
-        int deathSoundIndex = Random.Range(0, deathSounds.Length);
-        AudioSource.PlayClipAtPoint(deathSounds[deathSoundIndex], Camera.main.transform.position, deathSoundVolume);
-
-        int playersAmount = FindObjectsOfType<Player>().Length;
-        if (playersAmount <= 1) BringNewAlien();
-
-        GameObject explosion = Instantiate(smokeVFX, transform.position, Quaternion.identity);
-        explosion.transform.Rotate(-90, 0, 0, Space.Self);
-        Destroy(explosion, deathTime);
+        MenageDeathPoints();
+        PlayDeathSound();
+        GetSmoked();
     }
 
-    public void Successed()
+    private void GetSmoked()
     {
-        int playersAmount = FindObjectsOfType<Player>().Length;
-        if (playersAmount <= 1) BringNewAlien();
-
-        int sucessedSoundIndex = Random.Range(0, successedSounds.Length);
-        print(sucessedSoundIndex);
-        AudioSource.PlayClipAtPoint(successedSounds[sucessedSoundIndex], Camera.main.transform.position, successedSoundVolume);
-
-        ScoreDisplay scoreDisplay = FindObjectOfType<ScoreDisplay>();
-        scoreDisplay.AddPoints(pointsForSuccess);
         Destroy(gameObject);
+        GameObject smoke = Instantiate(smokeVFX, transform.position, Quaternion.identity);
+        smoke.transform.Rotate(-90, 0, 0, Space.Self);
+        Destroy(smoke, deathTime);
+    }
+
+    private void PlaySuccessSound()
+    {
+        int sucessedSoundIndex = Random.Range(0, successedSounds.Length);
+        AudioSource.PlayClipAtPoint(successedSounds[sucessedSoundIndex], Camera.main.transform.position, successedSoundVolume);
+    }
+
+    private void PlayDeathSound()
+    {
+        int deathSoundIndex = Random.Range(0, deathSounds.Length);
+        AudioSource.PlayClipAtPoint(deathSounds[deathSoundIndex], Camera.main.transform.position, deathSoundVolume);
+    }
+
+    private void PlayPlopSound()
+    {
+        int plopSoundIndex = Random.Range(0, plopSounds.Length);
+        AudioSource.PlayClipAtPoint(plopSounds[plopSoundIndex], Camera.main.transform.position, plopSoundVolume);
+    }
+
+    private void ManageSuccessPoints()
+    {
+        Score scoreDisplay = FindObjectOfType<Score>();
+        scoreDisplay.AddPoints(pointsForSuccess);
+    }
+
+    private void MenageDeathPoints()
+    {
+        Score score = FindObjectOfType<Score>();
+        score.RemovePoints(pointsForDeath);
+    }
+
+    private void OnDestroy()
+    {
+        playersAmount--;
     }
 }

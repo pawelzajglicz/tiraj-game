@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +13,22 @@ public class StairsPlatform : MonoBehaviour
 
     private Vector2 startPosition;
     public bool isInteractable = true;
-    private int currentStep = 0;
+    public int currentStep = 0;
+    /*public int currentStep
+    {
+        get
+        {
+            return currentStep;
+        }
+        set
+        {
+            currentStep = value;
+            print(currentStep);
+            BroadcastMessage("ReactToCurrentStep", currentStep);
+        }
+    }*/
+
+
 
     void Start()
     {
@@ -23,7 +39,8 @@ public class StairsPlatform : MonoBehaviour
     {
         if (!isInteractable) return;
 
-        if (collider.gameObject.tag == "Player")
+        GameObject colliderGameObject = collider.gameObject;
+        if (colliderGameObject.CompareTag("Player"))
         {
             ProcessSteppingSequence();
         }
@@ -38,18 +55,34 @@ public class StairsPlatform : MonoBehaviour
     IEnumerator ProcessStepping()
     {
         yield return new WaitForSeconds(timeInPosition);
-        currentStep++;
+        AddStep();
 
         if (currentStep <= numberOfSteps)
-        { 
-        transform.position = new Vector2(transform.position.x + stepOffset.x, transform.position.y + stepOffset.y);
-        StartCoroutine(ProcessStepping());
+        {
+            ProcessNextStep();
         }
         else
         {
-            transform.position = startPosition;
-            isInteractable = true;
-            currentStep = 0;
+            EndStepping();
         }
+    }
+
+    private void AddStep()
+    {
+        currentStep++;
+        BroadcastMessage("ReactToCurrentStep", currentStep);
+    }
+
+    private void ProcessNextStep()
+    {
+        transform.position = new Vector2(transform.position.x + stepOffset.x, transform.position.y + stepOffset.y);
+        StartCoroutine(ProcessStepping());
+    }
+
+    private void EndStepping()
+    {
+        transform.position = startPosition;
+        isInteractable = true;
+        currentStep = 0;
     }
 }

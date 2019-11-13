@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5484614004619426030}
   - component: {fileID: 6921409019750723674}
   - component: {fileID: -4468511535230473607}
+  - component: {fileID: -8191181931982227880}
   m_Layer: 0
   m_Name: StairsPumpMixPlatform
   m_TagString: Untagged
@@ -160,3 +161,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
+--- !u!114 &-8191181931982227880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2944057721316177128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b7ca49ca57bf340bcba1dcee312368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepOffset: {x: 2, y: 0.5}
+  numberOfSteps: 5
+  timeInPosition: 2
+  isInteractable: 1

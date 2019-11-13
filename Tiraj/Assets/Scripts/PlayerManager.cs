@@ -1,19 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] Player playerPrefab;
-    public int playerAmount;
+    public int playersAmount;
+    public Vector3 startPosition;
 
-    // Update is called once per frame
+    private static PlayerManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = gameObject.GetComponent<PlayerManager>();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static PlayerManager GetInstance()
+    {
+        return instance;
+    }
+
     void Update()
     {
-        int playersAmount = FindObjectsOfType<Player>().Length;
-        playerAmount = playersAmount;
+        playersAmount = Player.playersAmount;
 
-        if (playersAmount <= 1)
-            playerPrefab.BringNewAlien();
+        if (playersAmount <= 0)
+        {
+            BringNewAlien();
+        }
+    }
+
+    public void BringNewAlien()
+    {
+        Instantiate(playerPrefab, startPosition, Quaternion.identity);
     }
 }

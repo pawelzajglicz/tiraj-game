@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiappearingPlatform : MonoBehaviour
+public class DisappearingPlatform : MonoBehaviour
 {
     public float beforeDisappearingTime = 1.5f;
     public float disapperingTime = 1.5f;
@@ -28,7 +28,8 @@ public class DiappearingPlatform : MonoBehaviour
     {
         if (!isInteractable) return;
 
-        if (collider.gameObject.tag == "Player")
+        GameObject colliderGameObject = collider.gameObject;
+        if (colliderGameObject.CompareTag("Player"))
         {
             ProcessDisappearingSequence();
         }

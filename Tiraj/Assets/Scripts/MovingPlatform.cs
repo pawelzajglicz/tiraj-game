@@ -30,4 +30,22 @@ public class MovingPlatform : MonoBehaviour
         Vector2 offset = movementFactor * movementVector;
         transform.position = startingPos + offset;
     }
+
+    private void OnCollisionEnter2D(Collision2D collider)
+    {
+        GameObject colliderGameObject = collider.gameObject;
+        if (colliderGameObject.CompareTag("Player"))
+        {
+            colliderGameObject.transform.parent = transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collider)
+    {
+        GameObject colliderGameObject = collider.gameObject;
+        if (colliderGameObject.CompareTag("Player"))
+        {
+            colliderGameObject.transform.parent = null;
+        }
+    }
 }

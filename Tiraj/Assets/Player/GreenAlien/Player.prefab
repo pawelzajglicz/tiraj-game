@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1432512281}
   - component: {fileID: 1432512284}
   - component: {fileID: 1432512283}
+  - component: {fileID: 1306579965908449253}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -168,6 +169,7 @@ MonoBehaviour:
   childrenLimit: 3
   xBirthRange: 1
   worldReversingLimit: 2
+  startPosition: {x: 0, y: 0}
   worldReversingCounter: 0
   plopVFX: {fileID: 2638584077793229267, guid: 8da162f26eebdc347ac3de31d9e09f30, type: 3}
   smokeVFX: {fileID: 2638584077793229267, guid: e9c651f29ea7bc944bb7a6c5dff22cbd,
@@ -183,3 +185,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 48eac485715b49548a30dbb9ccb8d5ec, type: 3}
   - {fileID: 8300000, guid: 9cda2763d817fdc44929c79e66221782, type: 3}
   deathSoundVolume: 0.5
+--- !u!114 &1306579965908449253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817337906924260024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e9d1fe5c874fb45827a2a1d140bcde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

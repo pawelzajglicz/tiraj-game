@@ -22,6 +22,5 @@ public class RotatingPlatform : MonoBehaviour
         rotationValue = rotationSpeed * direction * Time.deltaTime;
         Vector3 rotateVector = new Vector3(0, 0, rotationValue);
         startTransform.Rotate(rotateVector);
-
     }
 }

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreDisplay : MonoBehaviour
+public class Score : MonoBehaviour
 {
     Text scoreText;
     int points;
-
-    // Use this for initialization
+    
     void Start()
     {
         scoreText = GetComponent<Text>();

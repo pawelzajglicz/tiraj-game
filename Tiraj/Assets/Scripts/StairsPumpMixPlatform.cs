@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
+[RequireComponent(typeof(PumpPlatform))]
+[RequireComponent(typeof(StairsPlatform))]
 public class StairsPumpMixPlatform : MonoBehaviour
 {
-    public Vector2 stepOffset = new Vector2(2f, 0.5f);
-    public int numberOfSteps = 5;
-    public float timeInPosition = 2f;
-
-
-    private Vector2 startPosition;
-    private bool isInteractable = true;
-    private int currentStep = 0;
 
     private PumpPlatform pumpPlatform;
+    private StairsPlatform stairsPlatform;
     public int[] pumpSteps = {2};
 
     private SpriteRenderer sprtiteRenderer;
@@ -22,54 +18,33 @@ public class StairsPumpMixPlatform : MonoBehaviour
 
     void Start()
     {
-        startPosition = transform.position;
         pumpPlatform = GetComponent<PumpPlatform>();
+        stairsPlatform = GetComponent<StairsPlatform>();
         pumpPlatform.Deactivate();
         sprtiteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    private void OnCollisionEnter2D(Collision2D collider)
+    
+    public void ReactToCurrentStep(int stepNumber)
     {
-        if (!isInteractable) return;
-
-        if (collider.gameObject.tag == "Player")
+        if (pumpSteps.Contains(stepNumber))
         {
-            ProcessSteppingSequence();
-        }
-    }
-
-    private void ProcessSteppingSequence()
-    {
-        isInteractable = false;
-        StartCoroutine(ProcessStepping());
-    }
-
-    IEnumerator ProcessStepping()
-    {
-        yield return new WaitForSeconds(timeInPosition);
-
-        currentStep++;
-        if (pumpSteps.Contains(currentStep))
-        {
-            pumpPlatform.Activate();
-            sprtiteRenderer.color = orange;
+            BecomePumping();
         }
         else
         {
-            pumpPlatform.Deactivate();
-            sprtiteRenderer.color = Color.white;
+            BecomeNormal();
         }
+    }
 
-        if (currentStep <= numberOfSteps)
-        {
-            transform.position = new Vector2(transform.position.x + stepOffset.x, transform.position.y + stepOffset.y);
-            StartCoroutine(ProcessStepping());
-        }
-        else
-        {
-            transform.position = startPosition;
-            isInteractable = true;
-            currentStep = 0;
-        }
+    private void BecomePumping()
+    {
+        pumpPlatform.Activate();
+        sprtiteRenderer.color = orange;
+    }
+
+    private void BecomeNormal()
+    {
+        pumpPlatform.Deactivate();
+        sprtiteRenderer.color = Color.white;
     }
 }

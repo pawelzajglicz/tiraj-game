@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1432512283, guid: aa16717e4974a824ab714c6cb2505b03, type: 3}
+  playersAmount: 0
+  startPosition: {x: -8.25, y: 6.3, z: 0}
