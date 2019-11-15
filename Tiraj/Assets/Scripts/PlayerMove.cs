@@ -52,7 +52,7 @@ public class PlayerMove : MonoBehaviour
 
     private void ServeJumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && isGrounded)
         {
             rigidBody.AddForce(new Vector2(0, jumpForce));
             isGrounded = false;

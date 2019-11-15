@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Invasion.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/LevelMovingPlatforms.unity
-    guid: 0ae6bbdd453973447aaa8d905a372308
-  - enabled: 1
-    path: Assets/Scenes/LevelStairsPlatform.unity
-    guid: 77a851665a1a5bf4db7ad6fc8a94997b
+    path: Assets/Scenes/End Menu.unity
+    guid: 4b8145ef90476424b99b61685b7d27a8
   m_configObjects: {}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5054395858034530972}
   - component: {fileID: 4366274480843462947}
   m_Layer: 0
-  m_Name: PlayerManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,3 +46,15 @@ MonoBehaviour:
   playerPrefab: {fileID: 1432512283, guid: aa16717e4974a824ab714c6cb2505b03, type: 3}
   playersAmount: 0
   startPosition: {x: -8.25, y: 6.3, z: 0}
+  isLivesLimited: 1
+  lifesLimit: 3
+  isMenuActive: 0
+  menu: {fileID: 0}
+  levelLoader: {fileID: 448093067039464572, guid: d28405fd5304f504fa3450ae9bd7506e,
+    type: 3}
+  isInvasionLevel: 0
+  remainedLifes: 0
+  lifes: {fileID: 0}
+  camera: {fileID: 0}
+  isGameOver: 0
+  score: {fileID: 0}

@@ -19,6 +19,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadInvasionLevel()
     {
+        GameManager.GetInstance().isInvasionLevel = true;
         SceneManager.LoadScene("Level Invasion");
     }
 
@@ -36,5 +37,12 @@ public class LevelLoader : MonoBehaviour
     internal void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+
+    public void LoadEndLevel()
+    {
+        GameManager.GetInstance().isInvasionLevel = false;
+        SceneManager.LoadScene("End Menu");
     }
 }

@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     public Lifes lifes;
     public CinemachineVirtualCamera camera;
     public bool isGameOver;
+    public Score score;
+    int points = 0;
 
     private static GameManager instance;
 
@@ -36,12 +38,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    internal void ManageTimeEnd()
+    {
+        levelLoader.LoadEndLevel();
+    }
+
     private void Start()
     {
-        levelLoader = FindObjectOfType<LevelLoader>();
         lifes = FindObjectOfType<Lifes>();
         remainedLifes = lifesLimit;
-        lifes.SetLifes(remainedLifes);
+        if (!isInvasionLevel && lifes != null)
+        {
+            lifes.SetLifes(remainedLifes);
+        }
     }
 
     public static GameManager GetInstance()
@@ -164,7 +173,37 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            levelLoader.LoadNextScene();
+            levelLoader.LoadInvasionLevel();
+        }
+    }
+
+    public void ManageScoreComponent()
+    {
+        if (score == null)
+        {
+            score = FindObjectOfType<Score>();
+        }
+    }
+
+    public void AddPoints(int pointsToAdd)
+    {
+        if (isInvasionLevel)
+        {
+            ManageScoreComponent();
+
+            points += pointsToAdd;
+            score.SetPoints(points);
+        }
+    }
+
+    public void RemovePoints(int pointsToRemove)
+    {
+        if (isInvasionLevel)
+        {
+            ManageScoreComponent();
+
+            points -= pointsToRemove;
+            score.SetPoints(points);
         }
     }
 }

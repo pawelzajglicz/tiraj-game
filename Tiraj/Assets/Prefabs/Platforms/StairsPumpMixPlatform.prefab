@@ -145,6 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pumpSteps: 02000000
+  normalSprite: {fileID: 21300000, guid: e04ffa28f4d0e4244b31e381950efc97, type: 3}
+  pumpSprite: {fileID: 21300000, guid: f8f8256f35c49ea449acbaa7f2dadd6a, type: 3}
 --- !u!114 &-4468511535230473607
 MonoBehaviour:
   m_ObjectHideFlags: 0

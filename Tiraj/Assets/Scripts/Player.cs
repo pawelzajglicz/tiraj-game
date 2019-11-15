@@ -176,14 +176,12 @@ public class Player : MonoBehaviour
 
     private void ManageSuccessPoints()
     {
-        Score scoreDisplay = FindObjectOfType<Score>();
-        scoreDisplay.AddPoints(pointsForSuccess);
+        GameManager.GetInstance().AddPoints(pointsForSuccess);
     }
 
     private void MenageDeathPoints()
     {
-        Score score = FindObjectOfType<Score>();
-        score.RemovePoints(pointsForDeath);
+        GameManager.GetInstance().RemovePoints(pointsForDeath);
     }
 
     private void OnDestroy()
