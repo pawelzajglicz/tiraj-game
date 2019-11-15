@@ -119,8 +119,8 @@ public class Player : MonoBehaviour
     {
         if (broughtChildren >= childrenLimit) return;
 
-        PlayerManager playerManager = FindObjectOfType<PlayerManager>();
-        playerManager.BringNewAlien();
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.BringNewAlien();
 
         broughtChildren++;
     }

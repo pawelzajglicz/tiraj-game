@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     private float movementFactor = 0f;
     private bool movingEnabled = false;
     private float xDisplacement;
-    private bool isGrounded;
+    public bool isGrounded = false;
     private float xVelocity;
     private float xVelocityAbs;
 
