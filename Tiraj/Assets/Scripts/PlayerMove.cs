@@ -14,26 +14,31 @@ public class PlayerMove : MonoBehaviour
     public bool isGrounded = false;
     private float xVelocity;
     private float xVelocityAbs;
+    public bool isPaused = false;
+    public Vector2 memberedVelocity;
 
     private Rigidbody2D rigidBody;
     private Animator animator;
 
     private static int horizontalDirection = 1;
 
-    
+
     void Start()
     {
         animator = GetComponent<Animator>();
         isGrounded = false;
         rigidBody = GetComponent<Rigidbody2D>();
     }
-    
+
     void Update()
     {
-        ServeJumping();
-        ServeAnimations();
-        ServeFacingDirection();
-        ServeHorizontalMoving();
+        if (!isPaused)
+        {
+            ServeJumping();
+            ServeAnimations();
+            ServeFacingDirection();
+            ServeHorizontalMoving();
+        }
     }
 
 
@@ -86,4 +91,23 @@ public class PlayerMove : MonoBehaviour
     {
         horizontalDirection *= -1;
     }
+
+    public void Resume()
+    {
+        isPaused = false;
+        animator.enabled = true;
+        rigidBody.isKinematic = false;
+        rigidBody.WakeUp();
+        rigidBody.velocity = memberedVelocity;
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+        animator.enabled = false;
+        memberedVelocity = rigidBody.velocity;
+        rigidBody.isKinematic = true;
+        rigidBody.Sleep();
+    }
+
 }
