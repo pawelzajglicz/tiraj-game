@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Plop()
+    public void Plop()
     {
         MenageDeathPoints();
         PlayPlopSound();

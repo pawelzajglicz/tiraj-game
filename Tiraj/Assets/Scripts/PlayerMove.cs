@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator animator;
 
-    private static int horizontalDirection = 1;
+    public static int horizontalDirection = 1;
 
 
     void Start()

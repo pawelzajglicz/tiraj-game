@@ -35,4 +35,26 @@ public class Lifes : MonoBehaviour
             lifesText.text = lifes.ToString();
         }
     }
+
+    public static Lifes instance;
+    public Lifes menu;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = gameObject.GetComponent<Lifes>();
+            menu = instance;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public static Lifes getInstance()
+    {
+        return instance;
+    }
 }

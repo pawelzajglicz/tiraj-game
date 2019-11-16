@@ -32,4 +32,6 @@ public class Score : MonoBehaviour
         points = newValue;
         scoreText.text = points.ToString();
     }
+
+    
 }

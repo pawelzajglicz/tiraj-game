@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1432512283, guid: aa16717e4974a824ab714c6cb2505b03, type: 3}
   playersAmount: 0
-  startPosition: {x: -8.25, y: 6.3, z: 0}
+  startPosition: {x: -7, y: 6.3, z: 0}
   isLivesLimited: 1
   lifesLimit: 3
   isMenuActive: 0
@@ -58,3 +58,9 @@ MonoBehaviour:
   camera: {fileID: 0}
   isGameOver: 0
   score: {fileID: 0}
+  points: 0
+  isEndLevel: 0
+  timeForQuit: 2.5
+  bringAliens: 1
+  isGameStarted: 0
+  xBirthMovement: 7
