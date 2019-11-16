@@ -25,6 +25,4 @@ public class Menu : MonoBehaviour
     {
         return instance;
     }
-    
-
 }
