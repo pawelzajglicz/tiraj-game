@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(PlayerMove))]
 public class Player : MonoBehaviour
 {
 
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
     private float xOffset;
     public int worldReversingCounter = 0;
     private int pointsForDeath = 1;
-    private int pointsForSuccess = 2;
+    private int pointsForSuccess = 1;
 
     [SerializeField] GameObject plopVFX;
     [SerializeField] GameObject smokeVFX;
@@ -93,7 +94,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Plop()
+    public void Plop()
     {
         MenageDeathPoints();
         PlayPlopSound();
@@ -119,8 +120,8 @@ public class Player : MonoBehaviour
     {
         if (broughtChildren >= childrenLimit) return;
 
-        PlayerManager playerManager = FindObjectOfType<PlayerManager>();
-        playerManager.BringNewAlien();
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        gameManager.BringNewAlien();
 
         broughtChildren++;
     }
@@ -175,14 +176,12 @@ public class Player : MonoBehaviour
 
     private void ManageSuccessPoints()
     {
-        Score scoreDisplay = FindObjectOfType<Score>();
-        scoreDisplay.AddPoints(pointsForSuccess);
+        GameManager.GetInstance().AddPoints(pointsForSuccess);
     }
 
     private void MenageDeathPoints()
     {
-        Score score = FindObjectOfType<Score>();
-        score.RemovePoints(pointsForDeath);
+        GameManager.GetInstance().RemovePoints(pointsForDeath);
     }
 
     private void OnDestroy()

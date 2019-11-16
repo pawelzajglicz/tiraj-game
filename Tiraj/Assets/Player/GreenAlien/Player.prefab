@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1432512284}
   - component: {fileID: 1432512283}
   - component: {fileID: 1306579965908449253}
+  - component: {fileID: 2899040421123687011}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -163,8 +164,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e0c5a7dc9d8774dabe349eae49a21d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 500
-  jumpForce: 325
   growingTempo: 0.1
   childrenLimit: 3
   xBirthRange: 1
@@ -197,3 +196,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e9d1fe5c874fb45827a2a1d140bcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 500
+  jumpForce: 325
+  isGrounded: 0
+  isPaused: 0
+  memberedVelocity: {x: 0, y: 0}
+--- !u!114 &2899040421123687011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817337906924260024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe42a66cf1b31849bbebacb7e0113ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityOffTime: 1
+  startGravity: {x: 0, y: 0}

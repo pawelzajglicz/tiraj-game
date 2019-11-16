@@ -13,6 +13,9 @@ public class StairsPumpMixPlatform : MonoBehaviour
     private StairsPlatform stairsPlatform;
     public int[] pumpSteps = {2};
 
+    public Sprite normalSprite;
+    public Sprite pumpSprite;
+
     private SpriteRenderer sprtiteRenderer;
     private Color orange = new Color(1.0f, 0.5f, 0f);
 
@@ -39,12 +42,12 @@ public class StairsPumpMixPlatform : MonoBehaviour
     private void BecomePumping()
     {
         pumpPlatform.Activate();
-        sprtiteRenderer.color = orange;
+        sprtiteRenderer.sprite = pumpSprite;
     }
 
     private void BecomeNormal()
     {
         pumpPlatform.Deactivate();
-        sprtiteRenderer.color = Color.white;
+        sprtiteRenderer.sprite = normalSprite;
     }
 }
