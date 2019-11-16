@@ -24,7 +24,13 @@ public class FlyingEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    
+    internal void Die()
+    {
+        Destroy(gameObject);
+        GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
+        Destroy(explosion, deathTime);
+    }
+
     void Update()
     {
         ManageBoost();
@@ -72,9 +78,4 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        GameObject explosion = Instantiate(plopVFX, transform.position, Quaternion.identity);
-        Destroy(explosion, deathTime);
-    }
 }

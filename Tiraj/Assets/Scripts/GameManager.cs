@@ -18,6 +18,16 @@ public class GameManager : MonoBehaviour
     public bool isInvasionLevel;
     public int remainedLifes;
     public Lifes lifes;
+    public int switchesStartNumber = 3;
+    public int switchesLeft;
+    public GravitySwitches gravitySwitches;
+
+    internal void DecreaseSwitchNumber(int v)
+    {
+        switchesLeft--;
+        gravitySwitches.SetSwitches(switchesLeft);
+    }
+
     public CinemachineVirtualCamera camera;
     public bool isGameOver;
     public Score score;
@@ -26,6 +36,8 @@ public class GameManager : MonoBehaviour
     public float timeForQuit = 2.5f;
     public bool bringAliens = true;
     public bool isGameStarted;
+
+
 
     private static GameManager instance;
     public float xBirthMovement = 7f;
@@ -51,6 +63,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        switchesLeft = switchesStartNumber;
         lifes = FindObjectOfType<Lifes>();
         remainedLifes = lifesLimit;
         if (!isInvasionLevel && lifes != null)
@@ -122,6 +135,16 @@ public class GameManager : MonoBehaviour
                 if (findedLifes != null)
                 {
                     lifes = findedLifes;
+                }
+            }
+
+            if (gravitySwitches == null)
+            {
+                GravitySwitches findedGravitySwitches = GravitySwitches.getInstance();
+                if (findedGravitySwitches != null)
+                {
+                    gravitySwitches = findedGravitySwitches;
+                    gravitySwitches.SetSwitches(switchesLeft);
                 }
             }
         }

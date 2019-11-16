@@ -15,7 +15,7 @@ public class FlyingEnemyDestroyer : MonoBehaviour
             {
                 for(int i = 0; i < enemies.Length; i++)
                 {
-                    Destroy(enemies[i].gameObject);
+                    enemies[i].Die();
                 }
             }
 
