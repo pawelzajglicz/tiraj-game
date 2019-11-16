@@ -867,7 +867,9 @@ MonoBehaviour:
 
     Moving right - right arrow
 
-    Jump - space or up arrow'
+    Jump - space or up arrow
+
+    Temporary gravity off - left ctrl'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7d17fc8da79355748904704ce617d520, type: 2}
   m_sharedMaterial: {fileID: -7871604482935701332, guid: 7d17fc8da79355748904704ce617d520,
@@ -934,15 +936,15 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -27.200628, w: 0}
   m_textInfo:
     textComponent: {fileID: 2071185977}
-    characterCount: 86
+    characterCount: 120
     spriteCount: 0
-    spaceCount: 16
-    wordCount: 17
+    spaceCount: 22
+    wordCount: 23
     linkCount: 0
-    lineCount: 4
+    lineCount: 5
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0

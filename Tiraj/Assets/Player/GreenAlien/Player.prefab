@@ -213,7 +213,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe42a66cf1b31849bbebacb7e0113ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchesStartNumber: 3
-  switchesLeft: 0
-  gravityOffTime: 0
+  gravityOffTime: 1
   startGravity: {x: 0, y: 0}

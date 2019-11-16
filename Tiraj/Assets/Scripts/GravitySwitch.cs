@@ -37,13 +37,18 @@ public class GravitySwitch : MonoBehaviour
         {
             Physics2D.gravity = Vector2.zero;
             yield return new WaitForSeconds(gravityOffTime);
-            turnOnGravity();
+            TurnOnGravity();
         }
 
     }
 
-    private void turnOnGravity()
+    private void TurnOnGravity()
     {
         Physics2D.gravity = startGravity;
+    }
+
+    private void OnDestroy()
+    {
+        TurnOnGravity();
     }
 }

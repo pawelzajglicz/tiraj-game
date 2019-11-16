@@ -24,8 +24,20 @@ public class GameManager : MonoBehaviour
 
     internal void DecreaseSwitchNumber(int v)
     {
-        switchesLeft--;
+        switchesLeft -= v;
         gravitySwitches.SetSwitches(switchesLeft);
+    }
+
+    internal void IncreaseSwitchNumber(int v)
+    {
+        switchesLeft += v;
+        gravitySwitches.SetSwitches(switchesLeft);
+    }
+
+    internal void IncreaseLifesNumber(int v)
+    {
+        remainedLifes += v;
+        lifes.SetLifes(remainedLifes);
     }
 
     public CinemachineVirtualCamera camera;
