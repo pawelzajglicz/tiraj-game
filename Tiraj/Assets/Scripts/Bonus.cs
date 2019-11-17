@@ -20,9 +20,8 @@ public class Bonus : MonoBehaviour
 
     private void GiveBonus()
     {
-        GameManager.GetInstance().IncreaseSwitchNumber(gravitySwitchBonus);
-        GameManager.GetInstance().IncreaseLifesNumber(lifeBonus);
-
+        WalkingLevelManager.GetInstance().IncreaseSwitchNumber(gravitySwitchBonus);
+        WalkingLevelManager.GetInstance().IncreaseLifesNumber(lifeBonus);
 
         Destroy(gameObject);
     }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class EndingSummary : MonoBehaviour
 {
-    private int points;
+    public int points;
     TextMeshProUGUI textMesh;
 
     private void Start()
@@ -17,9 +17,9 @@ public class EndingSummary : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.GetInstance().points != points)
+        if (GameSessionInfo.GetInstance().GetCurrentPoints() != points)
         {
-            points = GameManager.GetInstance().points;
+            points = GameSessionInfo.GetInstance().GetCurrentPoints();
             UpdateText();
         }
     }

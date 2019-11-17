@@ -17,6 +17,8 @@ public class FlyingEnemy : MonoBehaviour
 
     [SerializeField] GameObject plopVFX;
     private float deathTime = 1.5f;
+    private bool isPaused;
+    private Vector2 memberedVelocity;
 
     void Start()
     {
@@ -58,12 +60,16 @@ public class FlyingEnemy : MonoBehaviour
     private void Boost()
     {
         Player player = FindObjectOfType<Player>();
-        Vector2 heading = player.transform.position - transform.position;
-        Vector2 direction = heading.normalized;
+        if (player != null)
+        {
 
-        rigidBody.AddForce(direction * boost);
-        animator.SetTrigger("boost");
-        ServeFacing(direction);
+            Vector2 heading = player.transform.position - transform.position;
+            Vector2 direction = heading.normalized;
+
+            rigidBody.AddForce(direction * boost);
+            animator.SetTrigger("boost");
+            ServeFacing(direction);
+        }
     }
 
     private void ServeFacing(Vector2 direction)
@@ -78,4 +84,21 @@ public class FlyingEnemy : MonoBehaviour
         }
     }
 
+    public void Resume()
+    {
+        isPaused = false;
+        animator.enabled = true;
+        rigidBody.isKinematic = false;
+        rigidBody.WakeUp();
+        rigidBody.velocity = memberedVelocity;
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+        animator.enabled = false;
+        memberedVelocity = rigidBody.velocity;
+        rigidBody.isKinematic = true;
+        rigidBody.Sleep();
+    }
 }
