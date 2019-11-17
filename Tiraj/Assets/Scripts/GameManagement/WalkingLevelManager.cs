@@ -203,4 +203,9 @@ public class WalkingLevelManager : GameManagerBase
     {
         levelLoader.LoadNextScene();
     }
+
+    public override bool IsGravitySwitchAllowed()
+    {
+        return true;
+    }
 }

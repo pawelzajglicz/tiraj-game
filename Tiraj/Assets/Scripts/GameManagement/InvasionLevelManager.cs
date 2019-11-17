@@ -132,5 +132,9 @@ public class InvasionLevelManager : GameManagerBase
     {
         IncreaseScoreAmount(successPoints);
     }
-    
+
+    public override bool IsGravitySwitchAllowed()
+    {
+        return false;
+    }
 }

@@ -16,7 +16,7 @@ public class GravitySwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && GameManagerBase.GetInstance().IsGravitySwitchAllowed())
         {
             ProcessGravitySequence();
         }

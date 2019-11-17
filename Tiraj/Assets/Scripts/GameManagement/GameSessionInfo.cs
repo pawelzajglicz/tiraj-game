@@ -9,7 +9,7 @@ public class GameSessionInfo : MonoBehaviour
 
     public int startLifes = 3;
     public int leftLifes;
-    public int startGravitySwitches = 3;
+    public int startGravitySwitches = 2;
     public int gravitySwitchesLeft;
     public int startPoints = 0;
     public int currentPoints = 0;

@@ -73,5 +73,10 @@ public class GameManagerBase : MonoBehaviour
     {
 
     }
-    
+
+    virtual public bool IsGravitySwitchAllowed()
+    {
+        return true;
+    }
+
 }

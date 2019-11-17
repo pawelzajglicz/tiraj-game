@@ -43,3 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffd52fc9f841ca43be369e53bcf6d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startLifes: 3
+  leftLifes: 0
+  startGravitySwitches: 2
+  gravitySwitchesLeft: 0
+  startPoints: 0
+  currentPoints: 0
