@@ -15,6 +15,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        GameSessionInfo.GetInstance().Reset();
         SceneManager.LoadScene("Start Menu");
     }
 
