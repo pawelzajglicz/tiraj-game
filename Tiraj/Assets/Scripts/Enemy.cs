@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,5 +13,10 @@ public class Enemy : MonoBehaviour
             colliderGameObject.GetComponent<Player>().Plop();
         }
 
+    }
+
+    internal void Pause()
+    {
+        throw new NotImplementedException();
     }
 }

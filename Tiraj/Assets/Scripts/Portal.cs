@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
             Player player = colliderGameObject.GetComponent<Player>();
             player.Successed();
 
-            FindObjectOfType<GameManager>().PlayerEnteredPortal();
+            GameManagerBase.GetInstance().PlayerEnteredPortal();
         }
     }
 }

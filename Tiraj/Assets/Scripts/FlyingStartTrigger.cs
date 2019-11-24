@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FlyingStartTrigger : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collider)
+
+    private void OnTriggerEnter2D(Collider2D collider)
     {
         GameObject colliderGameObject = collider.gameObject;
         if (colliderGameObject.CompareTag("Player"))
@@ -18,8 +19,7 @@ public class FlyingStartTrigger : MonoBehaviour
                     enemy.StartFly();
                 }
             }
-
-            Destroy(gameObject);
+            
         }
     }
 }

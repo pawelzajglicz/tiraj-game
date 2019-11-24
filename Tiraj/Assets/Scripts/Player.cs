@@ -120,8 +120,7 @@ public class Player : MonoBehaviour
     {
         if (broughtChildren >= childrenLimit) return;
 
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        gameManager.BringNewAlien();
+        GameManagerBase.GetInstance().BringNewAlien();
 
         broughtChildren++;
     }
@@ -176,12 +175,12 @@ public class Player : MonoBehaviour
 
     private void ManageSuccessPoints()
     {
-        GameManager.GetInstance().AddPoints(pointsForSuccess);
+        GameManagerBase.GetInstance().ManagePlayerSuccess(pointsForDeath);
     }
 
     private void MenageDeathPoints()
     {
-        GameManager.GetInstance().RemovePoints(pointsForDeath);
+        GameManagerBase.GetInstance().ManagePlayerDeath(pointsForDeath);
     }
 
     private void OnDestroy()

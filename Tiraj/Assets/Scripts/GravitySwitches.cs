@@ -11,7 +11,7 @@ public class GravitySwitches : MonoBehaviour
     void Start()
     {
         gravitiesText = GetComponent<Text>();
-        gravitiesText.text = GameManager.GetInstance().remainedLifes.ToString();
+        gravitiesText.text = GameSessionInfo.GetInstance().GetGravitySwitchesLeft().ToString();
     }
 
 

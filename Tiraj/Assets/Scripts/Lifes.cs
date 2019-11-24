@@ -11,7 +11,7 @@ public class Lifes : MonoBehaviour
     void Start()
     {
         lifesText = GetComponent<Text>();
-        lifesText.text = GameManager.GetInstance().remainedLifes.ToString();
+        lifesText.text = GameSessionInfo.GetInstance().GetLifesLeft().ToString();
     }
 
 

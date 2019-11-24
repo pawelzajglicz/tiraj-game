@@ -16,7 +16,7 @@ public class GravitySwitch : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && GameManagerBase.GetInstance().IsGravitySwitchAllowed())
         {
             ProcessGravitySequence();
         }
@@ -24,10 +24,9 @@ public class GravitySwitch : MonoBehaviour
 
     private void ProcessGravitySequence()
     {
-        if (GameManager.GetInstance().switchesLeft <= 0) return;
-        GameManager.GetInstance().DecreaseSwitchNumber(1);
+        if (GameSessionInfo.GetInstance().GetGravitySwitchesLeft() <= 0) return;
 
-
+        GameManagerBase.GetInstance().RemoveGravitySwitch();
         StartCoroutine(GravitySequence());
     }
 
